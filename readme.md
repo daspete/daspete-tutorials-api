@@ -6,10 +6,113 @@
 - run ``` composer install ```
 - create your .env file
 - run ``` php artisan jwt:secret ``` to create a secret hash for the jwt auth
+- be sure, you have configured your database settings in the .env file
+- run ``` php artisan migrate ```
+- run ``` php artisan db:seed --class="UsersTableSeeder" ```
+
+The last command will create a basic user in the database
+
+- Name: APIC User
+- Email: user@api.dev
+- Password: 123456
 
 
 
+## Auth routes
 
+there are some routes for the JWT auth process
+
+### ``` /api/auth/login ```
+
+This route generates a new JWT token, if the user exists and the password is correct
+
+
+#### POST JSON
+
+``` json
+{
+    "email": "x0x@xo.0x",
+    "password": "xxxxxxxx"
+}
+```
+
+#### Response
+
+``` json
+{
+    "access_token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "expires_in": "3600",
+    "token_type": "bearer"
+}
+```
+
+### ``` /api/auth/logout ```
+
+This route invalidates the current JWT token of the user
+
+#### POST Header
+
+``` json
+{
+    "Authorization": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+```
+
+#### Response
+
+``` json
+{
+    "logout": true
+}
+```
+
+
+
+### ``` /api/auth/refresh ```
+
+This route generates a new JWT token
+
+
+#### POST Header
+
+``` json
+{
+    "Authorization": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+```
+
+#### Response
+
+``` json
+{
+    "access_token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "expires_in": "3600",
+    "token_type": "bearer"
+}
+```
+
+
+### ``` /api/auth/me ```
+
+Returns the current user datas
+
+
+#### POST Header
+
+``` json
+{
+    "Authorization": "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+```
+
+#### Response
+
+``` json
+{
+    "id": 1,
+    "email": "x0x@xo.0x"
+}
+```
 
 
 
