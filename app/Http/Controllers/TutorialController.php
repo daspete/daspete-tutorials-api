@@ -17,4 +17,17 @@ class TutorialController extends BaseController {
         ), 200);
     }
 
+    public function premium(){
+        return response()->json(array(
+            [
+                'title' => 'Premium Tutorial 1',
+                'content' => 'content 1'
+            ],
+            [
+                'title' => 'Premium Tutorial 2',
+                'content' => 'content 2'
+            ]
+        ), 200);
+    }
+
 }
